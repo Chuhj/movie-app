@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { API_URL, API_KEY, IMG_BASE_URL } from '../../Config';
-import MainMovieImage from './Sections/MainMovieImage';
+import MainMovieImage from '../commons/MainMovieImage';
 import GridCard from '../commons/GridCard';
 import { Row } from 'antd';
 

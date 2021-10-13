@@ -20,7 +20,7 @@ const MainMovieImage = (props) => {
           marginLeft: '2rem',
         }}
       >
-        <h2>{props.title}</h2>
+        <h2 style={{ color: 'white' }}>{props.title}</h2>
         <p>{props.description}</p>
       </div>
     </div>
