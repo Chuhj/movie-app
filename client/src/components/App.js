@@ -5,6 +5,7 @@ import LandingPage from './views/LandingPage/LandingPage';
 import LoginPage from './views/LoginPage/LoginPage';
 import RegisterPage from './views/RegisterPage/RegisterPage';
 import NavBar from './views/NavBar/NavBar';
+import MovieDetail from './views/MovieDetail/MovieDetail';
 
 import Auth from '../utils/auth';
 
@@ -21,6 +22,11 @@ function App() {
               exact
               path="/register"
               component={Auth(RegisterPage, false)}
+            />
+            <Route
+              exact
+              path="/movie/:movieId"
+              component={Auth(MovieDetail, null)}
             />
           </Switch>
         </div>
