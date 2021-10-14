@@ -10,14 +10,16 @@ function LandingPage(props) {
   const [movies, setMovies] = useState([]);
   const [mainMovie, setMainMovie] = useState('');
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const url = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const url = `${API_URL}movie/popular?api_key=${API_KEY}&language=ko-KR&page=${page}`;
     fetch(url)
       .then((res) => res.json())
       .then((res) => {
         setMovies([...movies, ...res.results]);
         page === 1 && setMainMovie(res.results[0]);
+        setLoading(false);
       });
   }, [page]);
 
@@ -52,6 +54,7 @@ function LandingPage(props) {
               />
             ))}
         </Row>
+        {loading && <div>Loading...</div>}
       </div>
       <div
         style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}

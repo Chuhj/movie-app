@@ -4,9 +4,7 @@ import { Descriptions } from 'antd';
 function MovieInfo({ movie }) {
   return (
     <Descriptions title="Movie Info" bordered>
-      <Descriptions.Item label="Title">
-        {movie.original_title}
-      </Descriptions.Item>
+      <Descriptions.Item label="Title">{movie.title}</Descriptions.Item>
       <Descriptions.Item label="Release Date">
         {movie.release_date}
       </Descriptions.Item>

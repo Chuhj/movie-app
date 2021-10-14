@@ -11,16 +11,18 @@ function MovieDetail({ match }) {
   const [movie, setMovie] = useState({});
   const [casts, setCasts] = useState([]);
   const [toggle, setToggle] = useState(false);
+  const [movieLoading, setMovieLoading] = useState(true);
+  const [castsLoading, setCastsLoading] = useState(true);
 
   useEffect(() => {
-    const movieUrl = `${API_URL}movie/${match.params.movieId}?api_key=${API_KEY}`;
+    const movieUrl = `${API_URL}movie/${match.params.movieId}?language=ko-KR&api_key=${API_KEY}`;
     const creditsUrl = `${API_URL}movie/${match.params.movieId}/credits?api_key=${API_KEY}`;
 
     fetch(movieUrl)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setMovie(res);
+        setMovieLoading(false);
       });
 
     fetch(creditsUrl)
@@ -28,6 +30,7 @@ function MovieDetail({ match }) {
       .then((res) => {
         console.log(res);
         setCasts(res.cast);
+        setCastsLoading(false);
       });
   }, [match]);
 
@@ -46,8 +49,8 @@ function MovieDetail({ match }) {
       )}
       <div style={{ width: '85%', margin: '1rem auto' }}>
         {/* Movie Info */}
-
-        {movie && <MovieInfo movie={movie} />}
+        {movieLoading && <div>Loading...</div>}
+        <MovieInfo movie={movie} />
 
         {/* Movie Casts */}
 
@@ -56,7 +59,7 @@ function MovieDetail({ match }) {
         >
           <button onClick={handleClickButton}>Toggle</button>
         </div>
-
+        {toggle && castsLoading && <div>Loading...</div>}
         {toggle && (
           <Row gutter={[16, 16]}>
             {casts &&
