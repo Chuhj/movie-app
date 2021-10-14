@@ -48,11 +48,14 @@ function LandingPage(props) {
                 image={`${IMG_BASE_URL}w500${movie.poster_path}`}
                 movieId={movie.id}
                 movieName={movie.original_title}
+                landingPage
               />
             ))}
         </Row>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div
+        style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}
+      >
         <button onClick={handleClickButton}>Load more</button>
       </div>
     </div>
