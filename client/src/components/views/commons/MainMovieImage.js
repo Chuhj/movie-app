@@ -1,7 +1,6 @@
 import React from 'react';
 
 const MainMovieImage = (props) => {
-  console.log(props.title);
   return (
     <div
       style={{
