@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Row } from 'antd';
+import { Row, Button } from 'antd';
 
 import { API_KEY, API_URL, IMG_BASE_URL } from '../../Config';
 import MainMovieImage from '../commons/MainMovieImage';
 import MovieInfo from './Sections/MovieInfo';
+import FavoriteButton from './Sections/FavoriteButton';
 import GridCard from '../commons/GridCard';
 
 function MovieDetail({ match }) {
@@ -28,7 +29,6 @@ function MovieDetail({ match }) {
     fetch(creditsUrl)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setCasts(res.cast);
         setCastsLoading(false);
       });
@@ -47,17 +47,27 @@ function MovieDetail({ match }) {
           description={movie.overview}
         />
       )}
+
       <div style={{ width: '85%', margin: '1rem auto' }}>
         {/* Movie Info */}
         {movieLoading && <div>Loading...</div>}
-        <MovieInfo movie={movie} />
+        {movie && (
+          <>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <FavoriteButton
+                userFrom={localStorage.getItem('userId')}
+                movieInfo={movie}
+              />
+            </div>
+            <MovieInfo movie={movie} />
+          </>
+        )}
 
         {/* Movie Casts */}
-
         <div
           style={{ display: 'flex', justifyContent: 'center', margin: '1rem' }}
         >
-          <button onClick={handleClickButton}>Toggle</button>
+          <Button onClick={handleClickButton}>Toggle</Button>
         </div>
         {toggle && castsLoading && <div>Loading...</div>}
         {toggle && (
