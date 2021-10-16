@@ -19,7 +19,7 @@ router.post('/favorited', (req, res) => {
       // Favorite 모델에서 movieId와 userFrom 일치하는 데이터를 찾아 있다면 true 없다면 false 반환
       if (err) res.status(400).send(err);
 
-      const favorited = favorites ? false : true;
+      const favorited = favorites.length ? true : false;
       res.json({ success: true, favorited });
     }
   );
