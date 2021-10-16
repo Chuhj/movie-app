@@ -50,8 +50,48 @@ function FavoriteButton({ userFrom, movieInfo }) {
     fetchData();
   }, [movieId]);
 
+  const handleClickFavorite = async () => {
+    if (favorited) {
+      try {
+        const data = { userFrom, movieId };
+        const res = await axios.post('/api/favorite/removeFavorite', data);
+
+        if (res.data.success) {
+          setFavorited(false);
+          setFavoriteNumber(favoriteNumber - 1);
+        } else {
+          alert('Failed to remove favorite!');
+        }
+      } catch (err) {
+        console.log(err);
+        alert('Failed to remove favorite!');
+      }
+    } else {
+      try {
+        const data = {
+          userFrom,
+          movieId,
+          movieTitle,
+          movieImage,
+          movieRuntime,
+        };
+        const res = await axios.post('/api/favorite/addFavorite', data);
+
+        if (res.data.success) {
+          setFavorited(true);
+          setFavoriteNumber(favoriteNumber + 1);
+        } else {
+          alert('Failed to add favorite!');
+        }
+      } catch (err) {
+        console.log(err);
+        alert('Failed to add favorite!');
+      }
+    }
+  };
+
   return (
-    <Button>
+    <Button onClick={handleClickFavorite}>
       {favorited ? 'Remove from favorites ' : 'Add to favorites '}
       {favoriteNumber}
     </Button>
