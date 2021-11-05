@@ -6,6 +6,7 @@ import LoginPage from './views/LoginPage/LoginPage';
 import RegisterPage from './views/RegisterPage/RegisterPage';
 import NavBar from './views/NavBar/NavBar';
 import MovieDetail from './views/MovieDetail/MovieDetail';
+import FavoritePage from './views/FavoritePage/FavoritePage';
 
 import Auth from '../utils/auth';
 
@@ -27,6 +28,11 @@ function App() {
               exact
               path="/movie/:movieId"
               component={Auth(MovieDetail, null)}
+            />
+            <Route
+              exact
+              path="/favorite"
+              component={Auth(FavoritePage, true)}
             />
           </Switch>
         </div>
